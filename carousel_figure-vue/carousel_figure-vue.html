@@ -96,7 +96,7 @@
 			</ul>
 		</div>
 		<ul id="num_button" class="button_num">
-			<li v-for="num in nums" class="button_num_li" v-on:click="button(num.index)">
+			<li v-for="num in nums" class="button_num_li" v-on:click="button(num.index)" id="num{{ num.index }}">
 				<span>{{ num.index }}</span>
 			</li>
 		</ul>
@@ -139,6 +139,7 @@
 						}
 						var show = document.getElementById("images");
 						show.style.marginLeft = j + 'px';
+						num_button.show(j);
 						li_length = j;
 					}
 				
@@ -161,6 +162,17 @@
 					clearInterval(lunbo);
 					images.go(i*-500);
 					images.time();
+				},
+				show:function(i){
+					var j = i/(-500)-1;
+					console.log(j);
+					var number = document.getElementById('num_button').getElementsByTagName('li');
+					for(var t=0;t<number.length;t++){
+						number[t].style.backgroundColor = 'transparent';
+						number[t].style.color = '#000';
+					}
+					number[j].style.backgroundColor = 'RGBA(0,0,0,.7)';
+					number[j].style.color = '#fff';
 				}
 			}
 		})
@@ -202,6 +214,7 @@
 			}
 		})
 		images.time();
+		num_button.show(-500);
 	</script>
 </body>
 </html>
