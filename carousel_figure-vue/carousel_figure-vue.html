@@ -108,11 +108,13 @@
 	</div>
 	<script type="text/javascript" src="vue.js"></script>
 	<script type="text/javascript">
-		var li_length = -500;
-		var lunbo;
+		var li_length = -500; //图片显示长度
+		var lunbo; //计时器名
+		// 图片
 		var images = new Vue({
 			el:'#images',
 			data:{
+				// 绑定图片地址
 				images:[
 					{ url : 'images/5.jpg'},
 					{ url : 'images/1.jpg'},
@@ -124,12 +126,14 @@
 				]
 			},
 			methods:{
+				// 计时器
 				time:function(){
 						lunbo = setInterval(function() {
 							li_length = li_length-500;
 							images.go(li_length);
 						},2000)
 					},
+				// 图片移动 
 				  go:function(j){
 				  		if(j < -2500){
 							j = -500;
@@ -142,10 +146,9 @@
 						num_button.show(j);
 						li_length = j;
 					}
-				
 			}
 		})
-
+		// 数字按钮
 		var num_button = new Vue({
 			el:'#num_button',
 			data:{
@@ -158,11 +161,13 @@
 				]
 			},
 			methods:{
+				// 点击按钮触发
 				button:function(i){
 					clearInterval(lunbo);
 					images.go(i*-500);
 					images.time();
 				},
+				// 图片与数字绑定，对应显示
 				show:function(i){
 					var j = i/(-500)-1;
 					console.log(j);
@@ -176,9 +181,11 @@
 				}
 			}
 		})
+		// 箭头
 		var arrow = new Vue({
 			el:'#arrow',
 			data:{
+				// 箭头属性
 				arrows:[
 					{
 						'id':'prev',
@@ -195,6 +202,7 @@
 				]
 			},	
 			methods:{
+				// 点击<触发
 				prev:function(){
 						var j = li_length;
 						console.log(j);
@@ -203,6 +211,7 @@
 						images.go(j);
 						images.time();
 					},
+				// 点击>触发 
 				next:function(){
 						var j = li_length;
 						console.log(j);
@@ -213,6 +222,7 @@
 					}
 			}
 		})
+		// 开始时自动触发
 		images.time();
 		num_button.show(-500);
 	</script>
