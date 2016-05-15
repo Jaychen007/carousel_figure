@@ -158,7 +158,9 @@
 			},
 			methods:{
 				button:function(i){
+					clearInterval(lunbo);
 					images.go(i*-500);
+					images.time();
 				}
 			}
 		})
